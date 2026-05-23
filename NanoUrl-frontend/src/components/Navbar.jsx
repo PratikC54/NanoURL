@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { useStoreContext } from '../contextApi/ContextApi.jsx'
 
 const navItems = [
   { label: 'Home', to: '/' },
@@ -10,7 +12,15 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+  const { token, logout } = useStoreContext()
   const isHome = location.pathname === '/'
+
+  const handleLogout = () => {
+    logout()
+    setMenuOpen(false)
+    toast.success('Logged out successfully')
+    navigate('/')
+  }
 
   const handleShorten = () => {
     setMenuOpen(false)
@@ -46,6 +56,57 @@ function Navbar() {
               </NavLink>
             </li>
           ))}
+          {token && (
+            <li>
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  `rounded-full border border-white/15 px-4 py-2 transition-all duration-200 hover:border-white/30 hover:text-white ${
+                    isActive ? 'text-cyan-300' : 'text-slate-300'
+                  }`
+                }
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          )}
+          <li>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `rounded-full border border-white/15 px-4 py-2 transition-all duration-200 hover:border-white/30 hover:text-white ${
+                  isActive ? 'text-cyan-300' : 'text-slate-300'
+                }`
+              }
+            >
+              Log in
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/register"
+              className={({ isActive }) =>
+                `rounded-full px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${
+                  isActive
+                    ? 'bg-gradient-to-r from-violet-500 to-cyan-400 shadow-violet-500/40'
+                    : 'bg-gradient-to-r from-violet-600 to-cyan-500 shadow-violet-600/25'
+                }`
+              }
+            >
+              Sign up
+            </NavLink>
+          </li>
+          {token && (
+            <li>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="rounded-full border border-red-500/30 px-4 py-2 text-slate-300 transition-all duration-200 hover:border-red-400/50 hover:bg-red-500/10 hover:text-red-300"
+              >
+                Log out
+              </button>
+            </li>
+          )}
           <li>
             <button
               type="button"
@@ -71,7 +132,7 @@ function Navbar() {
 
       <div
         className={`overflow-hidden border-t border-white/5 bg-slate-950/95 backdrop-blur-xl transition-all duration-300 md:hidden ${
-          menuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+          menuOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <ul className="flex flex-col gap-4 px-5 py-4 text-center font-medium">
@@ -82,6 +143,46 @@ function Navbar() {
               </NavLink>
             </li>
           ))}
+          {token && (
+            <li>
+              <NavLink
+                to="/dashboard"
+                className={linkClass}
+                onClick={() => setMenuOpen(false)}
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          )}
+          <li>
+            <NavLink
+              to="/login"
+              className={linkClass}
+              onClick={() => setMenuOpen(false)}
+            >
+              Log in
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/register"
+              className={linkClass}
+              onClick={() => setMenuOpen(false)}
+            >
+              Sign up
+            </NavLink>
+          </li>
+          {token && (
+            <li>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="w-full rounded-full border border-red-500/30 py-3 font-semibold text-red-300 transition hover:bg-red-500/10"
+              >
+                Log out
+              </button>
+            </li>
+          )}
           <li>
             <button
               type="button"
