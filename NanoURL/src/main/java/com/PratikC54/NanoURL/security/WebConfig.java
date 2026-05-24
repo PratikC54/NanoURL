@@ -11,9 +11,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Value(("${frontend.url}"))
     public String frontendUrl;
 
-    @Bean
-    public WebMvcConfigurer corsConfigure() {
-        return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
@@ -22,7 +19,5 @@ public class WebConfig implements WebMvcConfigurer {
                         .allowedHeaders("*")
                         .allowCredentials(true)
                         .maxAge(3600);
-            }
-        };
+        }
     }
-}
