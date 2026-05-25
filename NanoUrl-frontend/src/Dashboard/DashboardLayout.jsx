@@ -1,21 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  FaChartLine,
-  FaLink,
-  FaMousePointer,
-  FaSyncAlt,
-} from "react-icons/fa";
+import { FaChartLine, FaLink, FaMousePointer, FaSyncAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useStoreContext } from "../contextApi/ContextApi.jsx";
 import Graph from "./Graph.jsx";
 import UrlClicksChart from "./UrlClicksChart.jsx";
 import StatCard from "./StatCard.jsx";
-import {
-  fetchMyUrls,
-  fetchTotalClicks,
-  getDateRange,
-} from "./dashboardApi.js";
+import { fetchMyUrls, fetchTotalClicks, getDateRange } from "./dashboardApi.js";
+import { useFetchTotalClicks } from "../hooks/UseQuery.js";
 
 function DashboardLayout() {
   const { token } = useStoreContext();
@@ -66,6 +58,12 @@ function DashboardLayout() {
 
   const avgPerLink =
     myUrls.length > 0 ? (totalFromUrls / myUrls.length).toFixed(1) : "0";
+
+  function onError() {
+    toast.error("Failed to load analytics");
+  }
+
+  console.log(useFetchTotalClicks(token, onError));
 
   return (
     <div className="relative min-h-[calc(100svh-4rem)] overflow-x-hidden bg-slate-950 text-slate-200">
@@ -144,7 +142,9 @@ function DashboardLayout() {
                 <div className="mt-6">
                   {clickTimeline.length === 0 ? (
                     <div className="flex h-64 flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-slate-950/40 px-6 text-center">
-                      <p className="font-medium text-slate-300">No clicks yet</p>
+                      <p className="font-medium text-slate-300">
+                        No clicks yet
+                      </p>
                       <p className="mt-2 max-w-sm text-sm text-slate-500">
                         Share your short links to see engagement trends here.
                       </p>
