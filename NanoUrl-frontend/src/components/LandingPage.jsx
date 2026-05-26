@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useStoreContext } from '../contextApi/ContextApi';
+import api from '../api/api'
+import { toast } from 'react-hot-toast';
 
 const features = [
   {
@@ -53,23 +56,58 @@ const useCases = [
   { label: 'Profile bio', emoji: '🔗' },
 ]
 
+const demoShort = `${import.meta.env.VITE_FRONTEND_URL || 'https://example.com'}/abc123`
+
 function LandingPage() {
   const [url, setUrl] = useState('')
   const [shortened, setShortened] = useState(false)
   const [copied, setCopied] = useState(false)
+  const { token } = useStoreContext();
 
-  const handleShorten = (e) => {
+  const navigate = useNavigate()
+
+  const frontendOrigin = import.meta.env.VITE_FRONTEND_URL || window.location.origin
+  const backendOrigin = (import.meta.env.VITE_BACKEND_URL || window.location.origin).replace(/\/$/, '')
+
+  const [displayShortLink, setDisplayShortLink] = useState('')
+  const [backendShortLink, setBackendShortLink] = useState('')
+
+  const handleShorten = async (e) => {
+    
     e.preventDefault()
     if (!url.trim()) return
-    setShortened(true)
-    setCopied(false)
+
+    if (!token) {
+      // require authentication to shorten — send user to login
+      navigate('/login')
+      return
+    }
+
+    try {
+      const res = await api.post('/api/urls/shorten', { originalUrl: url }, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const shortUrl = res?.data?.shorturl || res?.data?.shortUrl || res?.data?.short_url
+      if (shortUrl) {
+        const display = `${frontendOrigin}/${shortUrl}`
+        const backend = `${backendOrigin}/${shortUrl}`
+        setDisplayShortLink(display)
+        setBackendShortLink(backend)
+        setShortened(true)
+        setCopied(false)
+      }
+    } catch (error) {
+      toast.error('Failed to shorten the link. Please try again.')
+    }
   }
-
-  const demoShort = 'nano.url/xK9mP2'
-  const fullShortLink = `https://${demoShort}`
-
+  
   const handleCopy = () => {
-    navigator.clipboard?.writeText(fullShortLink)
+    navigator.clipboard?.writeText(backendShortLink || displayShortLink)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -139,7 +177,7 @@ function LandingPage() {
               >
                 <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/5 p-4 sm:rounded-2xl">
                   <p className="text-left text-xs font-medium text-cyan-400/90">Your short link is ready</p>
-                  <p className="mt-2 break-all text-left text-lg font-medium text-white">{fullShortLink}</p>
+                  <p className="mt-2 break-all text-left text-lg font-medium text-white">{displayShortLink}</p>
                   <div className="mt-4 flex flex-wrap gap-3">
                     <button
                       type="button"
@@ -149,7 +187,7 @@ function LandingPage() {
                       {copied ? 'Copied!' : 'Copy link'}
                     </button>
                     <a
-                      href={fullShortLink}
+                      href={backendShortLink || displayShortLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="rounded-xl border border-white/10 px-4 py-3 text-sm font-medium text-slate-300 transition-colors hover:text-white"
