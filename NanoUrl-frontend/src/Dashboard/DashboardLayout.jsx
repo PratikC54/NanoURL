@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaChartLine, FaLink, FaMousePointer, FaSyncAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useStoreContext } from "../contextApi/ContextApi.jsx";
@@ -7,7 +7,6 @@ import Graph from "./Graph.jsx";
 import UrlClicksChart from "./UrlClicksChart.jsx";
 import StatCard from "./StatCard.jsx";
 import { fetchMyUrls, fetchTotalClicks, getDateRange } from "./dashboardApi.js";
-import { useFetchTotalClicks } from "../hooks/UseQuery.js";
 
 function DashboardLayout() {
   const { token } = useStoreContext();
@@ -25,7 +24,7 @@ function DashboardLayout() {
 
     setLoading(true);
     try {
-      const [urls, clicks] = await Promise.all([
+      const [urls, clicks] = await Promise.all([ 
         fetchMyUrls(token),
         fetchTotalClicks(token, startDate, endDate),
       ]);
@@ -63,7 +62,6 @@ function DashboardLayout() {
     toast.error("Failed to load analytics");
   }
 
-  console.log(useFetchTotalClicks(token, onError));
 
   return (
     <div className="relative min-h-[calc(100svh-4rem)] overflow-x-hidden bg-slate-950 text-slate-200">
@@ -207,7 +205,9 @@ function DashboardLayout() {
                           className="border-b border-white/5 transition hover:bg-white/[0.02]"
                         >
                           <td className="py-3 pr-4 font-mono text-cyan-300">
-                            {url.shorturl}
+                            <Link to={`${import.meta.env.VITE_BACKEND_URL}/${url.shorturl}`} target="_blank" rel="noopener noreferrer">
+                              {url.shorturl}
+                            </Link>
                           </td>
                           <td className="max-w-[12rem] truncate py-3 pr-4 text-slate-300 sm:max-w-xs">
                             {url.originalurl}
