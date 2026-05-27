@@ -205,7 +205,7 @@ function DashboardLayout() {
                           className="border-b border-white/5 transition hover:bg-white/[0.02]"
                         >
                           <td className="py-3 pr-4 font-mono text-cyan-300">
-                            <Link to={`${import.meta.env.VITE_BACKEND_URL}/${url.shorturl}`} target="_blank" rel="noopener noreferrer">
+                            <Link to={`${import.meta.env.VITE_FRONTEND_URL}/${url.shorturl}`} target="_blank" rel="noopener noreferrer">
                               {url.shorturl}
                             </Link>
                           </td>
