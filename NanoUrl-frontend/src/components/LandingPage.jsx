@@ -102,6 +102,7 @@ function LandingPage() {
         setCopied(false)
       }
     } catch (error) {
+      navigate('/error', )
       toast.error('Failed to shorten the link. Please try again.')
     }
   }
