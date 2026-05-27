@@ -48,6 +48,12 @@ public class UrlMappingController {
         return ResponseEntity.ok(urls);
     }
 
+    @GetMapping("/validate/{shortUrl}")
+    public ResponseEntity<Void> validateShortUrl(@PathVariable String shortUrl) {
+        boolean exists = urlMappingService.isShortUrlExists(shortUrl);
+        return exists ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/analytics/{shorturl}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<ClickEventDTO>> getUrlAnalytics(@PathVariable String shortUrl,
