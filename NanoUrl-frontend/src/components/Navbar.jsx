@@ -70,32 +70,58 @@ function Navbar() {
               </NavLink>
             </li>
           )}
-          <li>
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                `rounded-full border border-white/15 px-4 py-2 transition-all duration-200 hover:border-white/30 hover:text-white ${
-                  isActive ? 'text-cyan-300' : 'text-slate-300'
-                }`
-              }
-            >
-              Log in
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/register"
-              className={({ isActive }) =>
-                `rounded-full px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${
-                  isActive
-                    ? 'bg-gradient-to-r from-violet-500 to-cyan-400 shadow-violet-500/40'
-                    : 'bg-gradient-to-r from-violet-600 to-cyan-500 shadow-violet-600/25'
-                }`
-              }
-            >
-              Sign up
-            </NavLink>
-          </li>
+          {!token ? (
+            <li>
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `rounded-full border border-white/15 px-4 py-2 transition-all duration-200 hover:border-white/30 hover:text-white ${
+                    isActive ? 'text-cyan-300' : 'text-slate-300'
+                  }`
+                }
+              >
+                Log in
+              </NavLink>
+            </li>
+          ) : (
+            <li>
+              <button
+                type="button"
+                disabled
+                title="You are already logged in"
+                className="rounded-full border border-white/15 px-4 py-2 text-slate-500 bg-slate-900/80 cursor-not-allowed"
+              >
+                Log in
+              </button>
+            </li>
+          )}
+          {!token ? (
+            <li>
+              <NavLink
+                to="/register"
+                className={({ isActive }) =>
+                  `rounded-full px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${
+                    isActive
+                      ? 'bg-gradient-to-r from-violet-500 to-cyan-400 shadow-violet-500/40'
+                      : 'bg-gradient-to-r from-violet-600 to-cyan-500 shadow-violet-600/25'
+                  }`
+                }
+              >
+                Sign up
+              </NavLink>
+            </li>
+          ) : (
+            <li>
+              <button
+                type="button"
+                disabled
+                title="You are already logged in"
+                className="rounded-full px-5 py-2 text-sm font-semibold text-slate-500 bg-slate-900/80 cursor-not-allowed"
+              >
+                Sign up
+              </button>
+            </li>
+          )}
           {token && (
             <li>
               <button
@@ -154,24 +180,50 @@ function Navbar() {
               </NavLink>
             </li>
           )}
-          <li>
-            <NavLink
-              to="/login"
-              className={linkClass}
-              onClick={() => setMenuOpen(false)}
-            >
-              Log in
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/register"
-              className={linkClass}
-              onClick={() => setMenuOpen(false)}
-            >
-              Sign up
-            </NavLink>
-          </li>
+          {!token ? (
+            <li>
+              <NavLink
+                to="/login"
+                className={linkClass}
+                onClick={() => setMenuOpen(false)}
+              >
+                Log in
+              </NavLink>
+            </li>
+          ) : (
+            <li>
+              <button
+                type="button"
+                disabled
+                title="You are already logged in"
+                className="rounded-full border border-white/15 px-4 py-3 text-slate-500 bg-slate-900/80 cursor-not-allowed"
+              >
+                Log in
+              </button>
+            </li>
+          )}
+          {!token ? (
+            <li>
+              <NavLink
+                to="/register"
+                className={linkClass}
+                onClick={() => setMenuOpen(false)}
+              >
+                Sign up
+              </NavLink>
+            </li>
+          ) : (
+            <li>
+              <button
+                type="button"
+                disabled
+                title="You are already logged in"
+                className="rounded-full border border-white/15 px-4 py-3 text-slate-500 bg-slate-900/80 cursor-not-allowed"
+              >
+                Sign up
+              </button>
+            </li>
+          )}
           {token && (
             <li>
               <button
