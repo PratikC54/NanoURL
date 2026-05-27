@@ -8,8 +8,8 @@ import AboutPage from "./components/AboutPage.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import RegisterPage from "./components/RegisterPage.jsx";
 import DashboardLayout from "./Dashboard/DashboardLayout.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
 import { Toaster } from "react-hot-toast";
-
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation();
@@ -50,9 +50,10 @@ const AppRouter = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<DashboardLayout />} />
         <Route path="/:url" element={<ShortenUrlPage />} />
+        <Route path="/error" element={ <ErrorPage />} />
+        <Route path="*" element={ <ErrorPage message="Sorry, the page you are looking for does not exist."/> } />
       </Routes>
     </>
-
     );
 }
 
