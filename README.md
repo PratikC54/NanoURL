@@ -1,63 +1,146 @@
-# NanoURL
+# NanoURL 🔗
 
-A fast and minimal URL shortener application built with a modern full-stack architecture using React for the frontend and Spring Boot for the backend.
-
----
-
-## Features
-
-- Shorten long URLs instantly
-- Redirect short URLs to original links
-- REST API support
-- Frontend + Backend separation
-- Clean and scalable architecture
-- API testing with Postman
-- Version control with Git
+A full-stack URL shortening application built using **React**, **Spring Boot**, and **PostgreSQL**.
+NanoURL allows users to generate compact shortened URLs and redirect users seamlessly to original links.
 
 ---
 
-## Tech Stack
+# 🚀 Features
 
-### Frontend
-- React
-
-### Backend
-- Java
-- Spring Boot
-
-### Tools
-- Postman
-- Git
+* Shorten long URLs into compact links
+* Redirect shortened URLs to original destinations
+* RESTful API architecture
+* Persistent storage using PostgreSQL
+* Responsive frontend built with React
+* Dockerized setup for easy deployment
+* API testing with Postman
 
 ---
-# Backend Setup (Spring Boot)
-## Prerequisites
-- Java 17+ (or your version)
-- Maven
-- Run Backend
-- cd backend
-- mvn spring-boot:run
-  
----  
-# Frontend Setup (React)
-## Prerequisites
-- Node.js
-- npm
-- Run Frontend
-- cd frontend
-- npm install
-- npm start
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* React.js
+* Axios
+* Tailwind CSS
+
+## Backend
+
+* Spring Boot
+* Spring Web
+* Spring Data JPA
+* Spring Security
+
+## Database
+
+* PostgreSQL
+
+## Dev Tools
+
+* Docker
+* Postman
+* Maven
 
 ---
-# API Endpoints
-## Create Short URL
+
+# 🏗️ System Architecture
+
+Frontend (React) communicates with backend REST APIs built in Spring Boot.
+
+The backend:
+
+1. Accepts long URLs
+2. Generates unique short codes
+3. Stores mappings in PostgreSQL
+4. Redirects users using stored mappings
+
+---
+
+# 📂 Project Structure
+
+```bash
+NanoURL/
+│
+├── NanoUrl-frontend/        # React frontend
+├── NanoURL/                 # Spring Boot backend
+└── README.md
 ```
-POST /api/urls/shorten
- Request Body
+
+---
+
+# ⚙️ Installation & Setup
+
+## Clone Repository
+
+```bash
+git clone https://github.com/your-username/NanoURL.git
+cd NanoURL
+```
+
+---
+
+# 🔧 Backend Setup
+
+```bash
+cd NanoURL
+mvn clean install
+mvn spring-boot:run
+```
+
+---
+
+# 💻 Frontend Setup
+
+```bash
+cd NanoUrl-frontend
+npm install
+npm run dev
+```
+
+---
+
+# 🐳 Docker Setup
+
+Run the entire application using Docker:
+
+```bash
+docker build -t .
+```
+
+---
+
+# 🗄️ Database Configuration
+
+create `application.properties`:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/nanourl
+spring.datasource.username=postgres
+spring.datasource.password=yourpassword
+```
+
+---
+
+# 🔌 API Endpoints
+
+## Create Short URL
+
+```http
+POST /api/url/shorten
+```
+
+### Request Body
+
+```json
 {
   "originalUrl": "https://example.com"
 }
- Response
+```
+
+### Response
+
+```json
 {
     "clickCount": 0,
     "dateTime": "2026-05-19T21:29:28.5594516",
@@ -67,13 +150,44 @@ POST /api/urls/shorten
     "username": "Pratik"
 }
 ```
-# Testing with Postman
-Use Postman to test API endpoints.
-Example:
 
-- POST request for creating and validating user
-- POST request for shortening URLs
-- GET request for redirection testing
+---
 
-# Clone Repository
-- git clone https://github.com/your-username/NanoURL.git
+# 🔄 Redirect Endpoint
+
+```http
+GET /{shortCode}
+```
+
+Redirects user to original URL.
+
+---
+
+# 🧪 API Testing
+
+API endpoints were tested using Postman.
+
+Example test cases:
+
+* Valid URL shortening
+* Invalid URL handling
+* Redirection validation
+* Duplicate URL checks
+
+---
+
+---
+
+# 🌟 Future Improvements
+
+* Redis caching
+* Rate limiting
+* QR code generation
+
+---
+
+# 👨‍💻 Author
+
+Pratik Senapati
+
+GitHub: https://github.com/PratikC54
