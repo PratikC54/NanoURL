@@ -32,6 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-
+.env
+.env.prod
 src/main/resources/application.properties
-target/classes/*
+target/classes/*.class
+Dockerfile
