@@ -59,6 +59,7 @@ function DashboardLayout() {
     myUrls.length > 0 ? (totalFromUrls / myUrls.length).toFixed(1) : "0";
 
   function onError() {
+    navigate("/error", { state: { message: "Failed to load analytics data. Please try again later." } });
     toast.error("Failed to load analytics");
   }
 
