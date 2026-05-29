@@ -41,6 +41,8 @@ const ShortenUrlPage = () => {
           colors={["#306cce", "#72a1ed"]}
         />
         <h1 className="text-2xl font-bold mt-4">Redirecting...</h1>
+        
+        <h1 >Redirecting...</h1>
       </div>
     </div>
   );
