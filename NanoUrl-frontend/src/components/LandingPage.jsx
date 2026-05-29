@@ -108,7 +108,7 @@ function LandingPage() {
   }
   
   const handleCopy = () => {
-    navigator.clipboard?.writeText(backendShortLink || displayShortLink)
+    navigator.clipboard?.writeText(displayShortLink || backendShortLink)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -188,7 +188,7 @@ function LandingPage() {
                       {copied ? 'Copied!' : 'Copy link'}
                     </button>
                     <a
-                      href={backendShortLink || displayShortLink}
+                      href={displayShortLink || backendShortLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="rounded-xl border border-white/10 px-4 py-3 text-sm font-medium text-slate-300 transition-colors hover:text-white"
@@ -300,7 +300,7 @@ function LandingPage() {
       <footer className="border-t border-white/5 px-5 py-8 sm:px-8">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
           <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} NanoUrl — shorten links, share with ease.
+            © {new Date().getFullYear()} NanoUrl — shorten links, share with ease. Made with 💜 by a Pratik Senapati.
           </p>
           <Link to="/about" className="text-sm text-slate-400 transition-colors hover:text-white">
             About us
