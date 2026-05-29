@@ -28,7 +28,6 @@ public class AuthController {
         user.setRole("ROLE_USER");
         userService.registerUser(user);
         return ResponseEntity.ok("User registered successfully");
-
     }
 
     @PostMapping("/public/login")
