@@ -205,7 +205,7 @@ function AboutPage() {
       <footer className="border-t border-white/5 px-5 py-8 sm:px-8">
         <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
           <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} NanoUrl — shorten links, share with ease.
+            © {new Date().getFullYear()} NanoUrl — shorten links, share with ease. Made with 💜 by a Pratik Senapati.
           </p>
           <Link to="/" className="text-sm text-slate-400 transition-colors hover:text-white">
             Back to home
