@@ -129,7 +129,8 @@ spring.datasource.password=yourpassword
 
 <img width="1598" height="643" alt="image" src="https://github.com/user-attachments/assets/8fec6378-95af-407b-aba6-dc034531c83a" />
 
-<img width="1600" height="935" alt="image" src="https://github.com/user-attachments/assets/7568c556-4b44-4e01-a919-7ec374c621ca" />
+<img width="1486" height="923" alt="image" src="https://github.com/user-attachments/assets/dbc31864-5152-4dfd-a449-99f4ba8e1910" />
+
 
 
 
