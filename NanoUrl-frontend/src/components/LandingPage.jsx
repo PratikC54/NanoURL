@@ -154,7 +154,7 @@ function LandingPage() {
                     type="url"
                     value={url}
                     onChange={(e) => {
-                      setUrl(e.target.value)
+                      setUrl(e.target.value) 
                       setShortened(false)
                     }}
                     placeholder="https://example.com/very/long/link..."
@@ -218,7 +218,7 @@ function LandingPage() {
           </div>
         </section>
 
-        {/* How it works */}
+
         <section id="how-it-works" className="scroll-mt-24 border-t border-white/5 px-5 py-16 sm:px-8 sm:py-24">
           <div className="mx-auto max-w-2xl">
             <h2 className="text-center text-2xl font-bold text-white sm:text-3xl">How it works</h2>
