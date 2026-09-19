@@ -1,13 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
-import { getApps } from "./utils/helper.js";
-import "./App.css";
-
+import AppRouter from "./AppRouter.jsx";
 
 function App() {
-  const CurrentApp = getApps();
   return (
     <BrowserRouter>
-      <CurrentApp />
+      <AppRouter />
     </BrowserRouter>
   );
 }
