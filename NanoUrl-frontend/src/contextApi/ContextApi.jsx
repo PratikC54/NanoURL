@@ -25,7 +25,7 @@ export const ContextProvider = ({ children }) => {
 }
 
 
-export const useStoreContext = () => {
+export  const useStoreContext = () => {
     const context = useContext(ContextApi);
     return context;
 }
