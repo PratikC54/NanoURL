@@ -42,12 +42,3 @@ export async function fetchTotalClicks(token, startDate, endDate) {
     }));
 }
 
-export async function fetchUrlAnalytics(token, shortUrl, startDate, endDate) {
-  const start = `${startDate}T00:00:00`;
-  const end = `${endDate}T23:59:59`;
-  const { data } = await api.get(
-    `/api/urls/analytics/${shortUrl}?startDate=${start}&endDate=${end}`,
-    authHeaders(token),
-  );
-  return data ?? [];
-}
