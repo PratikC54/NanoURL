@@ -31,8 +31,8 @@ function DashboardLayout() {
       setMyUrls(urls);
       setClickTimeline(clicks);
     } catch (error) {
+      onError();
       console.error(error);
-      toast.error("Failed to load analytics");
       if (error.response?.status === 401) {
         navigate("/login");
       }
