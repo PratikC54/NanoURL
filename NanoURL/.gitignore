@@ -34,7 +34,7 @@ build/
 
 
 .env.prod
-src/main/resources/application.properties
-target/classes/*.class
+./src/main/resources/application.properties
+./target/classes/*.class
 Dockerfile
 .env
