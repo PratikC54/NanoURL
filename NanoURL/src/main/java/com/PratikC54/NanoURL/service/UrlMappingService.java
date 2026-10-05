@@ -20,7 +20,6 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
-//@RequiredArgsConstructor
 @AllArgsConstructor
 public class UrlMappingService {
 
